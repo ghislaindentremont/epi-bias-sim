@@ -65,14 +65,14 @@ const UI = (() => {
     return `<div class="t22">
       <div class="t22-title">${series ? `<i class="swatch ${series}"></i>` : ''}${title}</div>
       ${sub ? `<div class="t22-sub">${sub}</div>` : ''}
-      <table>
+      <div class="t22-scroll"><table>
         <thead><tr><th></th><th>${cols[0]}</th><th>${cols[1]}</th><th class="tot">Total</th></tr></thead>
         <tbody>
           <tr><th class="rowh">${rows[0]}</th><td>${cn(nm[0][0])}${f(a)}</td><td>${cn(nm[0][1])}${f(b)}</td><td class="tot">${f(a + b)}</td></tr>
           <tr><th class="rowh">${rows[1]}</th><td>${cn(nm[1][0])}${f(c)}</td><td>${cn(nm[1][1])}${f(d)}</td><td class="tot">${f(c + d)}</td></tr>
           <tr><th class="rowh tot">Total</th><td class="tot">${f(a + c)}</td><td class="tot">${f(b + d)}</td><td class="tot">${f(a + b + c + d)}</td></tr>
         </tbody>
-      </table>
+      </table></div>
       ${foot ? `<div class="t22-foot">${foot}</div>` : ''}
     </div>`;
   }

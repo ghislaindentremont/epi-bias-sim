@@ -43,7 +43,7 @@ const SelectionModule = (() => {
           </div>
           <button class="btn small" type="button" id="sel-redraw" hidden>Redraw (seed <span id="sel-seed">1</span>)</button>
         </div>
-        <span class="hint">Expected counts show the bias itself. A random draw (each person kept with probability p) adds sampling variability on top.</span>
+        <span class="hint"><b>Expected</b> sets each sample cell to exactly N × p (e.g. a = A × α), so the table can show fractions and the sample OR is <i>exactly</i> OR<sub>pop</sub> × αδ⁄βγ: what you see is the selection bias alone. <b>Random draw</b> instead keeps each of the N people independently with probability p (a ~ Binomial(A, α), matching <code>rbinom</code> in the R code), so cells are whole numbers and the sample OR scatters around that expected value. Press Redraw to see how much of the gap is bias and how much is chance.</span>
       </div>`;
   }
 

@@ -229,15 +229,16 @@ select { font-family: var(--font-body); }
 .pop-grid input { text-align: right; }
 
 /* ---------- 2x2 tables ---------- */
-.tables { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
-.t22 { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+.tables { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.t22 { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 .t22 .t22-title { font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
 .t22 .t22-sub { color: var(--muted); font-size: 0.78rem; }
+.t22 .t22-scroll { overflow-x: auto; }
 .t22 table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
-.t22 th, .t22 td { padding: 5px 8px; text-align: right; font-size: 0.86rem; }
+.t22 th, .t22 td { padding: 5px 6px; text-align: right; font-size: 0.86rem; }
 .t22 th { color: var(--muted); font-weight: 500; font-size: 0.76rem; }
-.t22 th.rowh { text-align: left; color: var(--ink-2); font-weight: 500; }
-.t22 td { font-family: var(--font-mono); border-top: 1px solid var(--line); }
+.t22 th.rowh { text-align: left; color: var(--ink-2); font-weight: 500; white-space: nowrap; }
+.t22 td { font-family: var(--font-mono); border-top: 1px solid var(--line); white-space: nowrap; }
 .t22 td.tot, .t22 th.tot { color: var(--muted); }
 .t22 td .cellname { color: var(--muted); font-size: 0.7rem; margin-right: 4px; }
 .t22 .t22-foot { font-size: 0.8rem; color: var(--ink-2); display: flex; gap: 12px; flex-wrap: wrap; }
