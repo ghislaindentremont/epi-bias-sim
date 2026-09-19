@@ -1,0 +1,17 @@
+# R packages installed into the dev container on create/rebuild.
+# One package per line; '#' starts a comment. Installed by
+# .devcontainer/install-r-packages.R via pak (CRAN names, or
+# owner/repo for GitHub packages, or pkg@version to pin).
+#
+# NOTE: glmmTMB has no prebuilt Linux/arm64 binary and compiling it needs
+# ~4-6 GB RAM. Give Docker Desktop >= 8 GB (Settings > Resources) or the
+# compiler is OOM-killed ("Killed signal terminated program cc1plus").
+
+# beta-binomial-simulations/bb_power_simulation.R
+glmmTMB
+ggplot2
+
+# analysis/wilson_score_power_validation.R
+dplyr
+tidyr
+patchwork

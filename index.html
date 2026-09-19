@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Epi Bias Workbench</title>
+<meta name="description" content="Interactive simulations of selection bias, measurement bias and confounding, built around 2×2 tables, odds ratios and inverse probability weights.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="eyebrow">Epidemiology · simulation</span>
+      <h1>Epi Bias Workbench</h1>
+      <p>Three sources of bias, one 2×2 table at a time. Change the mechanism, watch the estimate move, then correct it.</p>
+    </div>
+    <nav class="nav" aria-label="Modules">
+      <a href="#overview"><span class="k">00</span><span>Overview</span></a>
+      <a href="#selection"><span class="k">01</span><span>Selection bias</span></a>
+      <a href="#measurement"><span class="k">02</span><span>Measurement bias</span></a>
+      <a href="#confounding"><span class="k">03</span><span>Confounding</span></a>
+    </nav>
+    <div class="foot">
+      <button class="btn small" type="button" id="theme-toggle">Toggle theme</button>
+      <p style="margin-top:10px">Population numbers come from the NHANES 2009–12 teaching dataset (R package <code>NHANES</code>). Nothing leaves your browser.</p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- ================= OVERVIEW ================= -->
+    <section class="module" id="overview">
+      <div class="module-head">
+        <span class="eyebrow">Start here</span>
+        <h2>Why does the estimate not equal the truth?</h2>
+        <p class="lede">An epidemiological estimate can miss the true exposure–disease relationship for three structural reasons: the wrong people were studied (selection), the right people were measured wrongly (measurement), or a third variable was left to mix its effect with the exposure's (confounding). Each module below builds a population where the truth is known, applies one mechanism, and lets you see the damage — and the repair — on a 2×2 table.</p>
+      </div>
+
+      <div class="overview-grid">
+        <a class="ocard" href="#selection">
+          <span class="k">01</span>
+          <svg class="dag" viewBox="0 0 220 84" aria-hidden="true">
+            <rect x="8" y="8" width="96" height="68" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="56" y1="8" x2="56" y2="76" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="42" x2="104" y2="42" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="140" y="20" width="60" height="44" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <line x1="170" y1="20" x2="170" y2="64" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/><line x1="140" y1="42" x2="200" y2="42" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/>
+            <path d="M108,42 L134,42" stroke="var(--accent)" stroke-width="2" fill="none"/><path d="M130,37 L138,42 L130,47 z" fill="var(--accent)"/>
+            <text x="117" y="32" font-size="11" fill="var(--accent)" font-style="italic" text-anchor="middle">α β γ δ</text>
+          </svg>
+          <h3>Selection bias</h3>
+          <p>Sample the NHANES sex–diabetes population with cell-specific selection probabilities. See when the OR survives and when it doesn't, then recover it with inverse probability of selection weights.</p>
+          <span class="go">Open module →</span>
+        </a>
+        <a class="ocard" href="#measurement">
+          <span class="k">02</span>
+          <svg class="dag" viewBox="0 0 220 84" aria-hidden="true">
+            <rect x="20" y="16" width="44" height="52" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="156" y="16" width="44" height="52" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M64,30 C110,30 110,54 156,54" stroke="var(--s2)" stroke-width="2" fill="none"/>
+            <path d="M64,54 C110,54 110,30 156,30" stroke="var(--s2)" stroke-width="2" fill="none" opacity="0.5"/>
+            <text x="42" y="12" font-size="10" text-anchor="middle" fill="currentColor">true</text>
+            <text x="178" y="12" font-size="10" text-anchor="middle" fill="currentColor">observed</text>
+            <text x="110" y="78" font-size="11" fill="var(--accent)" font-style="italic" text-anchor="middle">Se, Sp</text>
+          </svg>
+          <h3>Measurement bias</h3>
+          <p>Misclassify disease or exposure with chosen sensitivity and specificity, non-differential or differential. Watch ratio measures slide toward the null, and back-correct the table with an assumed classification matrix.</p>
+          <span class="go">Open module →</span>
+        </a>
+        <a class="ocard" href="#confounding">
+          <span class="k">03</span>
+          <svg class="dag" viewBox="0 0 220 84" aria-hidden="true">
+            <circle cx="110" cy="18" r="13" fill="none" stroke="var(--s2)" stroke-width="1.5"/><text x="110" y="22" font-size="11" text-anchor="middle" fill="currentColor">Z</text>
+            <circle cx="40" cy="64" r="13" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="40" y="68" font-size="11" text-anchor="middle" fill="currentColor">X</text>
+            <circle cx="180" cy="64" r="13" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="180" y="68" font-size="11" text-anchor="middle" fill="currentColor">Y</text>
+            <line x1="99" y1="27" x2="52" y2="56" stroke="var(--s2)" stroke-width="1.8"/><line x1="121" y1="27" x2="168" y2="56" stroke="var(--s2)" stroke-width="1.8"/>
+            <line x1="54" y1="64" x2="164" y2="64" stroke="currentColor" stroke-width="1.8"/><path d="M160,59 L168,64 L160,69 z" fill="currentColor"/>
+          </svg>
+          <h3>Confounding</h3>
+          <p>Generate exposure and disease from a shared cause. Compare crude, stratified, Mantel–Haenszel, regression-adjusted and IPTW estimates — and separate confounding from the non-collapsibility of the odds ratio.</p>
+          <span class="go">Open module →</span>
+        </a>
+      </div>
+
+      <div class="prose" style="margin-top:36px">
+        <h3>The shared toolkit</h3>
+        <p>Every module uses the same conventions, so estimates are comparable across the three mechanisms.</p>
+        <ul>
+          <li><b>Table layout.</b> Exposed in the top row, diseased in the left column, so cell <em>a</em> is exposed-and-diseased. This matches <code>epi.2by2(TAB, method = "cross.sectional")</code> once the table has been rearranged with exposure first.</li>
+          <li><b>Effect measures.</b> Prevalence odds ratio <em>ad ⁄ bc</em>, prevalence ratio <em>[a⁄(a+b)] ⁄ [c⁄(c+d)]</em>, prevalence difference <em>a⁄(a+b) − c⁄(c+d)</em>. Confidence intervals for ratios are computed on the log scale (Woolf), which is also what <code>glm(family = "binomial")</code> and <code>confint()</code> do.</li>
+          <li><b>The anchor population.</b> NHANES 2009–12: 403 of 4,909 males and 357 of 4,949 females report diabetes, a prevalence OR of 1.15 for male sex. It is large enough to treat as a population and small enough that a biased sample's CI can exclude the truth.</li>
+          <li><b>Expected vs. random counts.</b> By default each simulator applies the mechanism to expected counts, so what you see is the bias alone. Switch to a random draw to add sampling variability and to reproduce the R code exactly.</li>
+          <li><b>Colour.</b> <i class="swatch"></i> population or truth, <i class="swatch s2"></i> what the analyst actually observes, <i class="swatch s3"></i> what a correction recovers. A badge marks whether the observed 95% CI covers the truth.</li>
+        </ul>
+        <h3>How the modules build on each other</h3>
+        <p>Selection and measurement act on a fixed 2×2 table: they redistribute or shrink cells, so the whole story is visible in the table arithmetic. Confounding needs a third variable, so its module generates individual-level data from a logistic model and analyses it the way you would in practice — stratify, pool with Mantel–Haenszel, add the covariate to <code>glm</code>, or re-weight with inverse probability of treatment weights. Each module ends with the R code that reproduces the current settings, so you can carry a scenario straight into your own script.</p>
+        <div class="callout"><b>A note on truth.</b> Because the population is simulated, the truth is known, and “bias” means the gap between the estimate and that truth in expectation — not the gap caused by chance. That distinction is why expected counts are the default: with a random draw, a CI that excludes the truth might simply be one of the 5%.</div>
+      </div>
+    </section>
+
+    <!-- ================= SELECTION ================= -->
+    <section class="module" id="selection">
+      <div class="module-head">
+        <span class="eyebrow">Module 01</span>
+        <h2>Selection bias</h2>
+        <p class="lede">Treat the NHANES sex–diabetes table as the population. Each of its four cells is sampled with its own probability (α, β, γ, δ). Selection that depends on exposure and disease <em>jointly</em> distorts the odds ratio by exactly αδ ⁄ βγ; inverse probability of selection weights undo it by dividing each sampled cell by its selection probability.</p>
+      </div>
+      <div class="workbench">
+        <div class="controls" aria-label="Selection bias controls"></div>
+        <div class="results"></div>
+      </div>
+    </section>
+
+    <!-- ================= MEASUREMENT ================= -->
+    <section class="module" id="measurement">
+      <div class="module-head">
+        <span class="eyebrow">Module 02</span>
+        <h2>Measurement bias</h2>
+        <p class="lede">The same population, measured imperfectly. Self-reported diabetes misses undiagnosed cases (sensitivity below 1) and occasionally counts people who do not have it (specificity below 1); the same can happen to exposure. Non-differential misclassification of a binary variable usually pulls ratio measures toward the null; differential misclassification can push them anywhere.</p>
+      </div>
+      <div class="workbench">
+        <div class="controls" aria-label="Measurement bias controls"></div>
+        <div class="results"></div>
+      </div>
+    </section>
+
+    <!-- ================= CONFOUNDING ================= -->
+    <section class="module" id="confounding">
+      <div class="module-head">
+        <span class="eyebrow">Module 03</span>
+        <h2>Confounding</h2>
+        <p class="lede">A binary confounder Z (think “older and heavier”) shifts both the probability of exposure X (physical activity) and the risk of disease Y (diabetes). In NHANES the crude OR for physical activity is 0.45; adjusting for BMI, age and sex moves it to 0.82. Here the same thing happens with parameters you control, and every standard remedy is applied side by side.</p>
+      </div>
+      <div class="workbench">
+        <div class="controls" aria-label="Confounding controls"></div>
+        <div class="results"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="js/stats.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/selection.js"></script>
+<script src="js/measurement.js"></script>
+<script src="js/confounding.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/rocker-org/devcontainer-features/r-rig:1": {},
+    "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
+      "packages": "languageserver",
+      "installSystemRequirements": true
+    }
+  },
+  // R packages come from .devcontainer/r-requirements.txt. Compiling glmmTMB
+  // needs ~4-6 GB RAM: give Docker Desktop >= 8 GB or the build is OOM-killed.
+  "hostRequirements": { "memory": "8gb" },
+  "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.claude /home/vscode/.config/gh && gh auth setup-git && Rscript .devcontainer/install-r-packages.R",
+  "mounts": [
+    "source=claude-code-config-${devcontainerId},target=/home/vscode/.claude,type=volume",
+    "source=gh-cli-config-${devcontainerId},target=/home/vscode/.config/gh,type=volume"
+  ],
+  "containerEnv": {
+    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
+  },
+  "runArgs": ["--env-file", ".devcontainer/.env"],
+  "customizations": {
+    "vscode": {
+      "extensions": ["REditorSupport.r"]
+    }
+  }
+}
